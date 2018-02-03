@@ -1,0 +1,86 @@
+//
+//
+//  REPORT AND SPECIFICATION
+//
+//
+
+Report Statements
+=========================================================================================================
+1) The original specification of the lexical specification as given in the assignment 1 outline has been
+retain. No additional specification or modifications has been added.
+
+    This is the exact regex for token recognition:
+
+        and|class|not|or|if|then|else|for|int|float|get|put|return|program|(L)(L|(N|0)|_)*|(((N)(N|0)*)|0)|(((N)(N|0)*)|0)((.(N|0)*N)|.0)(e(P|-)?(((N)(N|0)*)|0))?|&&|<>| <| >| <&| >&| ;| ,| .| ::| P| -| %| /| !| &| ^| {| }| ]| [| /%| %/| //
+
+2) Finite State Machine is included as STATE-MACHINE.png and STATE-MACHINE-2.png (it is one image).
+However due to limitations with tools (stated below) that I have used, certain symbols must be replaced.
+
+  ! is (
+  % is *
+  & is =
+  ^ is )
+
+  also
+
+  L is all letters that are not (a,c,d,e,f,g,h,i,l,m,n,o,p,r,s,t,u)
+  N is all non zero digits
+
+The picture also has some redundancies due to the tool itself (Such as state B, which is removed from my
+transition table), but it is a working machine.
+
+
+3) Structure
+There is the parse function that reads the entire string of the source code and read until a non-empty space is reached, then
+it calls nextToken function which read until it has reached an whitespace and determines if its last state was a final state.
+The next function determines this by running sequentially each character into the findState function from the TransitionTable
+class which reads from a predrawn csv file, which contains all the correct table transitions.
+
+Input file is read and writeToFile writes results to given named files.
+
+
+4) Test cases in the test.txt file
+
+      == + ( if <> - ) then < * { else > / } for <= = [ class >= and ] int ; not /* float , or */ get . // put : return :: program
+
+      ==<= <=== + (= ifa bd9djf091 d*= =2-1 =10.safd111 ;10.safd111 ;// /11r/ /3r1/1f /8 *./ ==program  += (a) if
+
+      notif ifelse returnif forelse thenclass infloat floatfloat putput return programfor
+
+      i f Db_123== dfs= d=dsafs =d+ d f== ==111 <=35235 323'i f b bb -bbbbb -- - _b _bee _a aBB_ B_ BA_ AB_ b_
+
+      01j212y1jhw1 123SAd_ aV0k_2k_1K aAV0k_2k_1K a00k_2k_1K a00k___1K ds_122--e1 :12-e w_1_2 222_11
+
+      2.34e01 12.34e1 1234.52e-123 2.0 2.123 2.033 2.010101 0.231 9.132 .2.32 .2 .321e+2341
+
+First line check all correct key words. Second lines check possible incorrect keywords. 3rd check possible incorrect reserved
+words. 4th and 5th check possible correct and incorrect identifiers. 6th lines check correct and incorrect floats.
+
+
+5) I used the table transition method as outline and described by the class slides. I also made use of this online resource
+(https://cyberzhg.github.io/toolbox/nfa2dfa) also given in the slides to create the nfa to dfa and transition tables, however
+my transition table has been modified due to redundancies and incompleteness of the online resource.
+
+I used this tool for the sake of time. I also used it to provide a system that would be more manageable and changeable as
+opposed to a handwritten version. I also did it for the sake of orderliness as the transition are more visibly apparent than
+a handwritten function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tools Used
+=========================================================================================================
